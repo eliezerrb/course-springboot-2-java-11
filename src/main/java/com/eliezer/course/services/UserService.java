@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.eliezer.course.entities.User;
 import com.eliezer.course.repositories.UserRepository;
+import com.eliezer.course.services.exception.ResourceNotFoundException;
 
 
 @Service //registrando como um componente para o autowired funcionar
@@ -22,7 +23,8 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		//orElseThrow tenta dar o get se não tem usuário eu vou lançar exception
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {
