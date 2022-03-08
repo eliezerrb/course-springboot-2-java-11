@@ -21,6 +21,7 @@ public class OrderService {
 	}
 
 	public Order findById(Long id) {
+		//Optional é o tipo do retorno do rerepository.findById(id);
 		Optional<Order> obj = repository.findById(id);
 		return obj.get();
 	}
